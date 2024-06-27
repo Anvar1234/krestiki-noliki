@@ -1,7 +1,7 @@
 package org.example.model;
 
 public class Move {
-    private Player player;
+    private final Player player;
     private boolean madeMove;
 
     public Move(Player player) {
@@ -11,10 +11,6 @@ public class Move {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public boolean isMadeMove() {

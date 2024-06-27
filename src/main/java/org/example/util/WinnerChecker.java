@@ -13,14 +13,18 @@ public class WinnerChecker {
         this.player2 = player2;
         this.cellsArray = cellsArray;
     }
+
+    /**
+     * Публичный метод для проверки победный ли ход.
+     */
     public boolean isWinner(){
         return checkWinner();
     }
 
-    //переписать на стримы:
+    // Переписать на стримы:
     private boolean checkWinner() {
-        //не обернул оба for в один while (count != 2), чтобы не проходить по массиву по два раза в случае, если победитель определится уже в строках.
-        //поэтому и counter-ы разные.
+        // Не обернул оба for в один while (count != 2), чтобы не проходить по массиву по два раза в случае, если победитель определится уже в строках.
+        // Поэтому и counter-ы разные.
 
         //проверяем строки
         int countInRow = 0;

@@ -1,29 +1,18 @@
 package org.example.model;
 
 public class Cell {
-    private int index;
     private String value;
     private final int x; //индекс строки массива [x][]
     private final int y; //индекс столбца массива [][y]
 
-    public Cell(int index, String value, int x, int y) {
-        this.index = index;
+    public Cell(String value, int x, int y) {
         this.value = value;
         this.x = x;
         this.y = y;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
     public void setValue(String value) {
         this.value = value;
-    }
-
-
-    public int getIndex() {
-        return index;
     }
 
     public String getValue() {
@@ -40,8 +29,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "index=" + index +
-                ", value=" + value +
+        return  "value=" + value +
                 ", x=" + x +
                 ", y=" + y;
     }

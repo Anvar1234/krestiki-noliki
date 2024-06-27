@@ -1,9 +1,7 @@
 package org.example.service;
 
-import org.example.model.Cell;
-import org.example.model.Move;
-import org.example.model.Player;
-import org.example.model.PlayingField;
+import org.example.exception_model.CellException;
+import org.example.model.*;
 import org.example.util.CellChanger;
 import org.example.util.CellGenerator;
 import org.example.util.WinnerChecker;
@@ -66,9 +64,10 @@ public class Play {
     }
 
     private void doPlay(Scanner scanner) {
-        boolean whileNotVictory = true; //флаг, чтобы можно было выключить цикл while при победе одного из игроков
-        //псевдослучайным образом определяем, какой игрок ходит первым
-        Player firstMovePlayer = playerWhoGoesFirst();
+        boolean whileNotVictory = true; // Флаг, чтобы можно было выключить цикл while при победе одного из игроков
+
+        Player firstMovePlayer = playerWhoGoesFirst(); // Псевдослучайным образом определяем, какой игрок ходит первым
+
         System.out.printf("Первым ходит игрок %s \n", firstMovePlayer.getName());
 
         boolean isFirstMove = true; // Флаг, чтобы следить за первым ходом
@@ -76,18 +75,20 @@ public class Play {
             for (Move move : moveList) {
                 if (isFirstMove && move.getPlayer().getId() == firstMovePlayer.getId()) { //если ход первый
                     doMove(scanner, move);
-                    isFirstMove = false; // меняем флаг, чтобы это условие больше не сработало
+                    isFirstMove = false; // Меняем флаг, чтобы это условие больше не сработало
+                    System.out.println(PlayingField.getField(cellsArray));
 
-                    //проверим ход на победу
+                    // Проверим ход на победу
                     if (winnerChecker.isWinner()) {
                         System.out.println("Победил игрок " + move.getPlayer().getName());
                         whileNotVictory = false;
                         break;
                     }
-                } else if (!isFirstMove && !move.isMadeMove()) { // остальные ходы
+                } else if (!isFirstMove && !move.isMadeMove()) { // Когда ход не первый
                     doMove(scanner, move);
+                    System.out.println(PlayingField.getField(cellsArray));
 
-                    //проверим ход на победу
+                    // Проверим ход на победу
                     if (winnerChecker.isWinner()) {
                         System.out.println("Победил игрок " + move.getPlayer().getName());
                         whileNotVictory = false;
@@ -104,10 +105,16 @@ public class Play {
     }
 
     private void doMove(Scanner scanner, Move move) {
-        System.out.printf("Игрок %s, введи номер ячейки, куда установить маркер %s : ", move.getPlayer().getName(), move.getPlayer().getMarker());
+        System.out.printf("Игрок %s, введи номер ячейки, куда установить маркер %s : ",
+                move.getPlayer().getName(),
+                move.getPlayer().getMarker());
         String cellNumber = scanner.next();
-        cellChanger.getChangedCells(move.getPlayer(), cellNumber);
+        try {
+            cellChanger.getChangedCells(move.getPlayer(), cellNumber);
+        } catch (CellException cellException) {
+            System.out.println(cellException.getMessage());
+            doMove(scanner, move);
+        }
         move.setMadeMove(true);
-        System.out.println(PlayingField.getField(cellsArray));
     }
 }

@@ -23,7 +23,7 @@ public class PlayRunner {
 
         System.out.println("\nДа начнется битва!\n");
 
-        //создаем объект игры и стартуем
+        // Создаем объект игры и стартуем
         Play play = new Play(player1, player2);
         play.getPlay(sc);
         sc.close();

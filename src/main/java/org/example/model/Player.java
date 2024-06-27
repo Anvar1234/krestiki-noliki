@@ -3,8 +3,8 @@ package org.example.model;
 public class Player {
     private static int countId = 0;
     private final int id;
-    private String name;
-    private String marker;
+    private final String name;
+    private final String marker;
 
     public Player(String name, String marker) {
         this.id = ++countId;
@@ -20,15 +20,7 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getMarker() {
         return marker;
-    }
-
-    public void setMarker(String marker) {
-        this.marker = marker;
     }
 }

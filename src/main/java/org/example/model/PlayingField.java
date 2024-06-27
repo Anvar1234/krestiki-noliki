@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayingField {
-    private static final int LENGTH = 3; //заделка на будущее, если захотим задавать размер поля.
+    private static final int LENGTH = 3;
     private static final int HEIGHT = 3;
 
     public static int getLength(){
@@ -14,7 +14,10 @@ public class PlayingField {
         return HEIGHT;
     }
 
-    public static String getField(Cell[][] cellsArray) { //используем не новую копию массива, а одну и ту же, которая будет использоваться в приложении.
+    /**
+     * Публичный метод для получения рисованного поля с указанием маркеров каждой ячейки.
+     */
+    public static String getField(Cell[][] cellsArray) {
         StringBuilder stringBuilder = new StringBuilder();
         List<String> stringList2 = new ArrayList<>();
         for (Cell[] cells : cellsArray) {
